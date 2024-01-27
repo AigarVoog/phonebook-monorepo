@@ -7,7 +7,7 @@
     "start": "node index.js",
     "start:latest": "npm run build:ui && node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd ui && npm run test:e2e",
     "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ./ui && npm run build && @powershell Copy-Item dist -Recurse ..",
     "build:github": "rm -rf dist && cd ./ui && npm run build && cp -R dist ../",
     "deploy": "fly deploy",

@@ -18,6 +18,10 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 let persons = [];
 
+app.get('/health', (req, res) => {
+  res.send('ok');
+});
+
 // Show number of persons in database
 app.get('/info', async (request, response, next) => {
   await Person.countDocuments()
