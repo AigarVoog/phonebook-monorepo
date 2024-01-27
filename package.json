@@ -9,6 +9,7 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ./ui && npm run build && @powershell Copy-Item dist -Recurse ..",
+    "build:github": "rm -rf dist && cd ./ui && npm run build && cp -R dist ../",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
