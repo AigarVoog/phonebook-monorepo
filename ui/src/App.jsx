@@ -138,7 +138,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <h3>TESTING 123</h3>
+      <h3>VERSION 1</h3>
       <Notification message={notificationMessage} isError={showingError} />
       <Filter value={filter} onChange={handleFilterInputChange} />
       <h2>Add new contact</h2>
