@@ -1,0 +1,36 @@
+name: Periodic Health Check
+
+on:
+  schedule:
+    - cron: '0 0 1 1 *'
+
+jobs:
+  health-check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed apps URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: 'https://phonebook-aigar.fly.dev/health'
+
+      - name: Notify success on Discord
+        if: success()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          description: '## Periodic health check succeeded'
+          details: 'https://phonebook-aigar.fly.dev is up and running'
+
+  failure_notification:
+    if: failure()
+    needs: [health-check]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Notify failed health-check in discord
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error          
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          description: '## Periodic health check failed'
+          details: 'https://phonebook-aigar.fly.dev is having some issues'
