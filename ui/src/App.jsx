@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import Filter from "./components/Filter";
-import InputForm from "./components/InputForm";
-import ContactsList from "./components/ContactsList";
-import Notification from "./components/Notification";
-import contactService from "./services/contacts";
+import { useEffect, useState } from 'react';
+import Filter from './components/Filter';
+import InputForm from './components/InputForm';
+import ContactsList from './components/ContactsList';
+import Notification from './components/Notification';
+import contactService from './services/contacts';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("My Name");
-  const [newNumber, setNewNumber] = useState("123-456789");
-  const [filter, setFilter] = useState("");
-  const [notificationMessage, setNotificationMessage] = useState("");
+  const [newName, setNewName] = useState('My Name');
+  const [newNumber, setNewNumber] = useState('123-456789');
+  const [filter, setFilter] = useState('');
+  const [notificationMessage, setNotificationMessage] = useState('');
   const [showingError, setShowingError] = useState(false);
 
   const filteredContacts = persons.filter((contact) =>
@@ -46,8 +46,8 @@ const App = () => {
           .create(personObject)
           .then((returnedPerson) => {
             setPersons(persons.concat(returnedPerson));
-            setNewName("");
-            setNewNumber("");
+            setNewName('');
+            setNewNumber('');
             setShowingError(false);
             setNotificationMessage(
               `'${returnedPerson.name}' was successfully added to the phonebook!`
@@ -66,11 +66,7 @@ const App = () => {
   };
 
   const handleDelete = (id) => {
-    if (
-      window.confirm(
-        "Are you sure you want to permanently delete this contact?"
-      )
-    ) {
+    if (window.confirm('Are you sure you want to permanently delete this contact?')) {
       contactService
         .remove(id)
         .then(
@@ -118,9 +114,7 @@ const App = () => {
             setPersons(persons.filter((n) => n.id !== person.id));
             throw new Error();
           }
-          setPersons(
-            persons.map((p) => (p.id === person.id ? returnedPerson : p))
-          );
+          setPersons(persons.map((p) => (p.id === person.id ? returnedPerson : p)));
           setShowingError(false);
           setNotificationMessage(`'${person.name}' was successfully modified!`);
           setTimeout(() => {
@@ -132,9 +126,7 @@ const App = () => {
           if (error.response && error.response.data) {
             setNotificationMessage(error.response.data.error);
           } else {
-            setNotificationMessage(
-              `the person '${person.name}' was already deleted from server`
-            );
+            setNotificationMessage(`the person '${person.name}' was already deleted from server`);
           }
           setTimeout(() => {
             setNotificationMessage(null);
@@ -158,10 +150,7 @@ const App = () => {
         handleNumberInputChange={handleNumberInputChange}
       />
       <h2>Numbers</h2>
-      <ContactsList
-        filteredContacts={filteredContacts}
-        handleDelete={handleDelete}
-      />
+      <ContactsList filteredContacts={filteredContacts} handleDelete={handleDelete} />
     </div>
   );
 };

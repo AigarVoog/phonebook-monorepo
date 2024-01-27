@@ -1,4 +1,10 @@
-const InputForm = ({ handleSubmit, newName, handleNameInputChange, newNumber, handleNumberInputChange }) => {
+const InputForm = ({
+  handleSubmit,
+  newName,
+  handleNameInputChange,
+  newNumber,
+  handleNumberInputChange,
+}) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -8,7 +14,7 @@ const InputForm = ({ handleSubmit, newName, handleNameInputChange, newNumber, ha
         Number: <input value={newNumber} onChange={handleNumberInputChange} />
       </div>
       <div>
-        <button type="submit">add</button>
+        <button type='submit'>add</button>
       </div>
     </form>
   );
