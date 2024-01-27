@@ -12,7 +12,9 @@
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:all": "npm run lint && cd ui && npm run lint",
+    "install:deps": "npm install && cd ui && npm install"
   },
   "author": "aigar voog",
   "license": "ISC",
