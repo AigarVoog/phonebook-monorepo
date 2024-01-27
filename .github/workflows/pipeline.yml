@@ -30,7 +30,7 @@ jobs:
       - name: Test
         uses: cypress-io/github-action@v5
         with:
-          command: cd ui && npm run test:e2e
+          command: npm test
           start: npm start
           wait-on: http://localhost:3001      
 
